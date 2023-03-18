@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "[URL]http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd[/URL]">
+<html xmlns="[URL]http://www.w3.org/1999/xhtml[/URL]">
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <style type="text/css">
+            #main_image, #other_image {
+                list-style-type: none
+            }
+            #main_image img {
+                width: 308px;
+                height: 360px
+            }
+            #other_image img {
+                width: 144px;
+                height: 216px
+            }
+            #btnAction{
+                color: red;
+                background: bisque;
+                width: 120px;
+                height: 40px;
+                font-size: 20px;
+                margin-left: 39px;
+            }
+            #exit{
+                color: red;
+                background: bisque;
+                width: 120px;
+                height: 40px;
+                float: right;
+                font-size: 20px;
+                margin-right: 380px;
+            }
+        </style>
+        <script type="text/javascript">
+            
+            function display_random_image(){
+                $("#btnAction").hide();
+                $("#exit").show();
+                Array.prototype.shuffle = function() {
+                    var s = [];
+                    while (this.length) s.push(this.splice(Math.random() * this.length, 1));
+                    while (s.length) this.push(s.pop());
+                    return this;
+                }
+                //preload the images
+                var picPaths = [
+                    'images/1.jpg',
+                    'images/2.jpg',
+                    'images/3.jpg',
+                    'images/4.jpg',
+                    'images/5.jpg',
+                    'images/6.jpg',
+                    'images/7.jpg',
+                    'images/8.jpg',
+                    'images/9.jpg',
+                    'images/10.jpg',
+                    'images/11.jpg',
+                    'images/12.jpg',
+                    'images/13.jpg',
+                    'images/14.jpg',
+                    'images/15.jpg',
+                    'images/16.jpg',
+                    'images/17.jpg',
+                    'images/18.jpg',
+                    'images/19.jpg',
+                    'images/20.jpg',
+                    'images/21.jpg',
+                    'images/22.jpg',
+                    'images/23.jpg',
+                    'images/24.jpg'];
+                picPaths.shuffle();
+                picO = new Array();
+                for(i=0; i < picPaths.length; i++){
+                    picO[i] = new Image();
+                    picO[i].src = picPaths[i];
+                }
+                var mainImgs = document.getElementById('main_image').getElementsByTagName('img');
+                    for(i=0; i < mainImgs.length; i++){
+                        mainImgs[i].src = picO[i].src;
+                    }
+                return;
+            } 
+            function show_btn(){
+                $("#btnAction").show();
+                $("#exit").hide();
+            }
+            window.onload = function(){
+                $("#exit").hide();
+            }
+        </script>
+    </head>
+    <body>
+        <ul id="main_image">
+            <a href=""><img src="images/1.jpg" alt="" /></a>
+            <a href=""><img src="images/2.jpg" alt="" /></a>
+            <a href=""><img src="images/3.jpg" alt="" /></a>
+        </ul>
+        <button id="btnAction" onclick="display_random_image();">shuffle</button>
+        <button id="exit" onclick="show_btn();">exit</button>
+    </body>
+</html>
